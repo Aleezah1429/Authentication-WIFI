@@ -8,7 +8,6 @@ import Geolocation from '@react-native-community/geolocation';
 
 
 function UserRegister(props) {
-// var db = openDatabase({ name: 'UserDatabase.db' });
 const [lati, setLati] = useState('')
 const [longi, setLongi] = useState('')
   const [email, setEmail] = useState("");
