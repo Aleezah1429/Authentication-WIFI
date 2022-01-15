@@ -12,6 +12,8 @@ import { jsonToCSV } from 'react-native-csv'
 // import RNFetchBlob from 'react-native-fetch-blob';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
 import { response } from 'express';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // DA251D - redtam
 // FFFFFF - whitetam
 // 222222 - blacktam
@@ -120,7 +122,7 @@ useEffect(()=>{
 // androidwifi.setEnabled(false)
 androidwifi.loadWifiList((wifiStringList) => {
   var wifiArray = JSON.parse(wifiStringList);
-  console.log("WIFI",wifiArray)
+  // console.log("WIFI",wifiArray)
   setList(wifiArray)
     // console.log("slslxsxn",wifiArray);
   },
@@ -172,19 +174,23 @@ androidwifi.loadWifiList((wifiStringList) => {
 
   }
 
-const LogOut = () =>{
-  console.log("USer",localStorage.getItem("user"))
+const LogOut = async () =>{
+  await AsyncStorage.setItem("UserEmail","")
+      await AsyncStorage.setItem("UserName","")
+      await AsyncStorage.setItem("UserPass","")
+      ToastAndroid.show("Successfully LogoOut",ToastAndroid.SHORT)
+      props.navigation.navigate("Login")
 
 }
  
     return(
       <View style={{ marginTop:"5%",marginBottom:"25%" }}>
 <View style={{display:"flex",flexDirection:"row",justifyContent:"flex-end",marginBottom:"5%"}}>
-      <TouchableOpacity onPress={()=>{props.navigation.navigate("")}}>
-        {/* <Image style={{width: 40, height: 40}} source={require("../assets/User-Profile-PNG-High-Quality-Image.png")}/> */}
+      <TouchableOpacity onPress={()=>{props.navigation.navigate("Profile")}}>
+        <Image style={{width: 40, height: 40}} source={require("../assets/User-Profile-PNG-High-Quality-Image.png")}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{props.navigation.navigate("")}}>
-        {/* <Image style={{width: 40, height: 40,marginLeft:"5%"}} source={require("../assets/logout.png")}/> */}
+        <TouchableOpacity onPress={()=>{LogOut()}}>
+        <Image style={{width: 40, height: 40,marginLeft:"5%"}} source={require("../assets/logout.png")}/>
         </TouchableOpacity>
       </View>
       <Text style={{ fontWeight: "bold", fontSize: 32,textAlign:"center",marginBottom:"5%", color: "#DA251D" }}>All Wifi Networks</Text>
