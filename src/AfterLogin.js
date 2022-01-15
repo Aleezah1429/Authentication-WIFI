@@ -6,10 +6,8 @@ import wifi from "react-native-wifi-reborn"
 import androidwifi from "react-native-android-wifi"
 import Modal from "react-native-modal";
 import { ScrollView } from 'react-native-gesture-handler';
-// import BackgroundTask from 'react-native-background-task'
 import BackgroundService from 'react-native-background-actions';
 import { jsonToCSV } from 'react-native-csv'
-// import RNFetchBlob from 'react-native-fetch-blob';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
 import { response } from 'express';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -19,36 +17,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // 222222 - blacktam
 
 function AfterLogin(props) {
-//   const jsonData = `[
-//   {
-//       "Column 1": "1-1",
-//       "Column 2": "1-2",
-//       "Column 3": "1-3",
-//       "Column 4": "1-4"
-//   },
-//   {
-//       "Column 1": "2-1",
-//       "Column 2": "2-2",
-//       "Column 3": "2-3",
-//       "Column 4": "2-4"
-//   },
-//   {
-//       "Column 1": "3-1",
-//       "Column 2": "3-2",
-//       "Column 3": "3-3",
-//       "Column 4": "3-4"
-//   },
-//   {
-//       "Column 1": 4,
-//       "Column 2": 5,
-//       "Column 3": 6,
-//       "Column 4": 7
-//   }
-// ]`;
-
-// const results = jsonToCSV(jsonData);
-// console.log(results)
-
 
 
   const [list, setList] = useState([]);
@@ -58,68 +26,9 @@ function AfterLogin(props) {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-
-//   const download=()=>{
-//    const jsonData=`[
-//      {
-//        "FIRST_NAME":"${firstname}",
-//        "LAST_NAME":"${lastname}",
-//        "EMAIL":"${email}"
-//      }
-//    ]`
-// const results = jsonToCSV(jsonData);
-
-//     // write the current list of answers to a local csv file
-// const pathToWrite = `${RNFetchBlob.fs.dirs.DownloadDir}/mydata.csv`;
-// console.log('pathToWrite', pathToWrite);
-// // pathToWrite /storage/emulated/0/Download/data.csv
-// RNFetchBlob.fs
-//   .writeFile(pathToWrite, results, 'utf8')
-//   .then(() => {
-//     console.log(`wrote file ${pathToWrite}`);
-//     // wrote file /storage/emulated/0/Download/data.csv
-//   })
-//   .catch(error => console.error(error));
-//   }
-  // BackgroundTask.define(() => {
-  //   console.log('Hello from a background task')
-  //   BackgroundTask.finish()
-  // })
+  
+  
 useEffect(()=>{
-  // BackgroundService.start(()=>{console.log("background")},{
-  //   taskName: 'Example',
-  //   taskTitle: 'ExampleTask title',
-  //   taskDesc: 'ExampleTask description',
-  //   taskIcon: {
-  //       name: 'ic_launcher',
-  //       type: 'mipmap',
-  //   },
-  //   color: '#ff00ff',
-  //   linkingURI: 'yourSchemeHere://chat/jane', // See Deep Linking for more info
-  //   parameters: {
-  //       delay: 1000,
-  //   },
-  // } );
-
-  // BackgroundService.stop()
-  // BackgroundTask.schedule({period:5})
-//   const granted =  PermissionsAndroid.request(
-//     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-//     {
-//       title: 'Location permission is required for WiFi connections',
-//       message:
-//         'This app needs location permission as this is required  ' +
-//         'to scan for wifi networks.',
-//       buttonNegative: 'DENY',
-//       buttonPositive: 'ALLOW',
-//     },
-// );
-// if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-//   // You can now use react-native-wifi-reborn
-// } else {
-//   // Permission denied
-// }
-// androidwifi.setEnabled(false)
 androidwifi.loadWifiList((wifiStringList) => {
   var wifiArray = JSON.parse(wifiStringList);
   // console.log("WIFI",wifiArray)
