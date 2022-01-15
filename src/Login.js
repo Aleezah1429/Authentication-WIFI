@@ -3,7 +3,7 @@ import { View, Text, Button, TextInput,Image,ToastAndroid, Alert,TouchableOpacit
 import {Signup,Home_Style} from "../../style.js"
 import { openDatabase } from 'react-native-sqlite-storage';
 import Geolocation from '@react-native-community/geolocation';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -14,6 +14,8 @@ const [lati, setLati] = useState('')
 const [longi, setLongi] = useState('')
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [name, setName] = useState("");
+
 
 
 useEffect(()=>{
@@ -44,7 +46,7 @@ useEffect(()=>{
 
   }
 
-  const onLogin=()=>{
+  const onLogin=async()=>{
     // if(email!="" && pass!=""){
     //   fetch('https://auth-sql-app.herokuapp.com/Login')
     //   .then((response) => response.json())
@@ -112,7 +114,10 @@ useEffect(()=>{
       ToastAndroid.show("Login successfully",ToastAndroid.SHORT)
       setEmail("")
       setPass("")
-      AsyncStorage.set("User",{email,pass})
+      setName("")
+      await AsyncStorage.setItem("UserEmail",email)
+      await AsyncStorage.setItem("UserName",name)
+      await AsyncStorage.setItem("UserPass",pass)
       props.navigation.navigate("AfterLogin")
     }
 
@@ -123,9 +128,12 @@ useEffect(()=>{
   }
 
     return(
-     <View style={{alignItems:"center",marginTop:"25%", backgroundColor:"#FFFFFF"}}>
+     <View style={{alignItems:"center",marginTop:"25%"}}>
       <View>
         <Text style={{ fontSize: 50, color: "#DA251D", fontWeight: 'bold',marginBottom:10,}}>Login</Text>
+      </View>
+      <View style={styles.field}>
+        <TextInput style={{color:"#222222",fontSize:17}} placeholderTextColor="#222222"  value={name} keyboardType={"default"} onChangeText={(e)=>setName(e)} placeholder="Name"/>
       </View>
       <View style={styles.field}>
         <TextInput style={{color:"#222222",fontSize:17}} placeholderTextColor="#222222"  value={email} keyboardType={"email-address"} onChangeText={(e)=>setEmail(e)} placeholder="Email"/>
@@ -158,7 +166,7 @@ const styles = StyleSheet.create({
       borderWidth: 2,
       borderColor: "#DA251D",
       width: "90%",
-      height:'12%',
+      height:'10%',
       margin: 15,
       fontSize:"25px",
       color:"white",
