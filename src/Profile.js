@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,24 +6,44 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
+import { useEffect } from 'react/cjs/react.development';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import getUUID from 'react-native-fetch-blob/utils/uuid';
 
-export default class Profile extends Component {
 
-  render() {
+
+
+export default function Profile(){
+  const [user,Setuser]  = useState({})
+
+const getuser=async()=>{
+  const val1 = await AsyncStorage.getItem("UserName") 
+  const val2 = await AsyncStorage.getItem("UserEmail") 
+  const val3 = await AsyncStorage.getItem("UserPass") 
+
+  console.log("USERR",{val1,val2,val3})
+  await Setuser({val1,val2,val3})
+}
+
+useEffect(()=>{
+  getuser()
+  console.log("MYUSER",user)
+   
+},[])
+
     return (
       <View style={styles.container}>
           <View style={styles.header}></View>
-          <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+          <Image style={styles.avatar} source={require("../assets/profilePic.png")}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>John Doe</Text>
-              <Text style={styles.email}>John@gmail.com</Text>
+              <Text style={styles.name}>{user.val1}</Text>
+              <Text style={styles.email}>{user.val2}</Text>
             </View>
         </View>
      </View>
     );
   }
-}
 
 const styles = StyleSheet.create({
   header:{
@@ -56,7 +76,7 @@ const styles = StyleSheet.create({
   },
   email:{
 
-    fontSize:26,
+    fontSize:20,
     color: "#222222",
     marginTop:10
   },
