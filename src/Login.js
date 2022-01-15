@@ -47,66 +47,6 @@ useEffect(()=>{
   }
 
   const onLogin=async()=>{
-    // if(email!="" && pass!=""){
-    //   fetch('https://auth-sql-app.herokuapp.com/Login')
-    //   .then((response) => response.json())
-    //   .then((results) => {
-    //     console.log(results.length)
-    //     if(results.length==0){
-    //       console.log("length==0")
-    //       ToastAndroid.show("Please register first",ToastAndroid.SHORT)}
-        
-    //     for(var i=0;i<results.length;i++){
-    //       user = results[i]
-    //       console.log(user)
-    //       if(i==results.length-1){
-    //         console.log("length-1")
-    //         if(user.Email!=email){
-    //         console.log("!email")
-
-    //         ToastAndroid.show("Please register first",ToastAndroid.SHORT)
-    //         setEmail("")
-    //         setPass("")
-    //         break
-    //       }
-    //       }
-    //       if(user.Email==email){
-    //         console.log("email if")
-    //         if(user.Password==pass){
-    //         console.log("pass if")
-
-    //           console.log("Location",lati,longi)
-    //           fetch('https://auth-sql-app.herokuapp.com/Location', {
-    //         method: 'POST',
-    //         headers: {
-    //           Accept: 'application/json',
-    //           'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({Latitude:lati,Longitude:longi,Email:email}) 
-    //       })
-    //         console.log("User login")
-    //         ToastAndroid.show("You are successfully login",ToastAndroid.SHORT)
-    //         setEmail("")
-    //         setPass("")
-            
-    //         props.navigation.navigate("AfterLogin")
-    //         break
-    //         }
-          
-    //       else{
-    //         console.log("pass else")
-
-    //         console.log("not user")
-    //         ToastAndroid.show("Enter correct passsword",ToastAndroid.SHORT)
-    //         break
-    //       }
-    //     }
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-    // }
 
 
     if(email!="" && pass!=""){
