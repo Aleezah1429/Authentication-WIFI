@@ -14,6 +14,8 @@ const [longi, setLongi] = useState('')
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [name, setName] = useState("");
+  const [phoneNo, setphoneNo] = useState();
+
 
   useEffect(()=>{
     Geolocation.getCurrentPosition(data=>{
@@ -23,11 +25,11 @@ const [longi, setLongi] = useState('')
   })
 
   const onRegister=()=>{
-    if(email!="" && name!="" && pass!=""){
+    if(email!="" && name!="" && pass!="" && phoneNo!=""){
     console.log("register")
     fetch('https://auth-sql-app.herokuapp.com/Login').then((response) => response.json())
     .then((json) => {
-       console.log(json)
+       console.log("JSON",json)
        for(var i=0;i<json.length;i++){
         var user = json[i]
         if(user.Email==email){
@@ -42,7 +44,7 @@ const [longi, setLongi] = useState('')
               Accept: 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({Name:name,Email:email,Password:pass,Latitude:lati,Longitude:longi}) 
+            body: JSON.stringify({Name:name,Email:email,PhoneNumber:phoneNo,Password:pass,Latitude:lati,Longitude:longi}) 
           })
           ToastAndroid.show("Successfully registered",ToastAndroid.SHORT)
           props.navigation.navigate("Login")
@@ -56,21 +58,24 @@ const [longi, setLongi] = useState('')
   }
 
     return(
-     <View style={{alignItems:"center",marginTop:"25%", backgroundColor:"#FFFFFF"}}>
+     <View style={{alignItems:"center",marginTop:"5%"}}>
       <View>
-        <Text style={{ fontSize: 50, color: "#DA251D", fontWeight: 'bold',marginBottom:10 }}>Register</Text>
+        <Text style={{ fontSize: 50, color: "white", fontWeight: 'bold',marginBottom:10 }}>Register</Text>
       </View>
       <View style={styles.field}>
-        <TextInput style={{color:"#222222",fontSize:17}} placeholderTextColor="#222222" value={name} keyboardType={"default"} onChangeText={(e)=>setName(e)} placeholder="Name"/>
+        <TextInput style={{color:"white",fontSize:17,height:"100%"}} placeholderTextColor="white" value={name} keyboardType={"default"} onChangeText={(e)=>setName(e)} placeholder="Name"/>
       </View>
       <View style={styles.field}>
-        <TextInput style={{color:"#222222",fontSize:17}} placeholderTextColor="#222222" value={email} keyboardType={"email-address"} onChangeText={(e)=>setEmail(e)} placeholder="Email"/>
+        <TextInput style={{color:"white",fontSize:17,height:"100%"}} placeholderTextColor="white" value={email} keyboardType={"email-address"} onChangeText={(e)=>setEmail(e)} placeholder="Email"/>
       </View>
       <View style={styles.field}>
-        <TextInput style={{color:"#222222",fontSize:17}} placeholderTextColor="#222222" secureTextEntry={true} value={pass} onChangeText={(e) => setPass(e)} placeholder="Password" />
+        <TextInput style={{color:"white",fontSize:17,height:"100%"}} placeholderTextColor="white" value={phoneNo} keyboardType={"number-pad"} onChangeText={(e)=>setphoneNo(e)} placeholder="Phone No."/>
+      </View>
+      <View style={styles.field}>
+        <TextInput style={{color:"white",fontSize:17,height:"100%"}} placeholderTextColor="white" secureTextEntry={true} value={pass} onChangeText={(e) => setPass(e)} placeholder="Password" />
       </View>
 
-      <View style={{margin:"5%",paddingLeft:"3%",paddingRight:"3%",backgroundColor:"#DA251D"}}>
+      <View style={{margin:"5%",paddingLeft:"3%",paddingRight:"3%",backgroundColor:"navy"}}>
     <Text onPress={()=>onRegister()} style={styles.ButtonStyle}>Register</Text>
     </View>
 </View>
@@ -83,9 +88,9 @@ const [longi, setLongi] = useState('')
 const styles = StyleSheet.create({
   field:{
     borderWidth: 2,
-    borderColor: "#DA251D",
+    borderColor: "white",
     width: "90%",
-    height:'12%',
+    height:'11%',
     margin: 15,
     fontSize:"25px",
     color:"white"
